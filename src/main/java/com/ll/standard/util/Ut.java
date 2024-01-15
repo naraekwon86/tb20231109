@@ -39,5 +39,19 @@ public class Ut {
         public static String getContent(String filePath){
             return Files.readString(Paths.get(filePath));
         }
+        public static long getContentAsLong(String testFilePath, long defaultValue){
+            final String content = getContent(testFilePath);
+            if (content == null) return defaultValue;
+
+            try {
+                return Long.parseLong(content);
+
+            }catch (NumberFormatException e){
+                return defaultValue;
+            }
+        }
+        public static void save(String filePath, long content){
+            save(filePath, String.valueOf(content));
+        }
     }
 }
