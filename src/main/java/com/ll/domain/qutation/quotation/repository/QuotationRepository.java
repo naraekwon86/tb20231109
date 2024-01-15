@@ -2,12 +2,19 @@ package com.ll.domain.qutation.quotation.repository;
 
 import com.ll.domain.qutation.quotation.entity.Quotation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class QuotationRepository {
     private final List<Quotation> quotations;
     private long lastQuotationId;
+
+    public QuotationRepository(){
+        quotations =new ArrayList<>();
+        lastQuotationId = 0;
+    }
+
     public List<Quotation> findAll(){
         return quotations;
     }
