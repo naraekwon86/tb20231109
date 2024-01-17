@@ -1,6 +1,5 @@
 package com.ll.standard.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 
@@ -79,19 +78,13 @@ public class Ut {
         }
 
         @SneakyThrows
-        public static <T> T getContent(String testFilePath, Class<?> cls) {
+        public static <T> T getContent(String filePath, Class<T> cls) {
             final String content = getContent(filePath);
 
             if (content == null) {
                 return null;
             }
-            try {
-                return OBJECT_MAPPER.readValue(content, cls);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace(); //역질렬화 관련 오류 노출
-                return null;
-
-            }
+            return OBJECT_MAPPER.readValue(content, cls);
         }
     }
 }
