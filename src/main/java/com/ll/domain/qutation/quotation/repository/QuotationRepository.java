@@ -2,35 +2,12 @@ package com.ll.domain.qutation.quotation.repository;
 
 import com.ll.domain.qutation.quotation.entity.Quotation;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class QuotationRepository {
-    private final List<Quotation> quotations;
-    private long lastQuotationId;
-
-    public QuotationRepository(){
-        quotations =new ArrayList<>();
-        lastQuotationId = 0;
-    }
-
-    public List<Quotation> findAll(){
-        return quotations;
-    }
-    public void delete(Quotation quotation){
-        quotations.remove(quotation);
-    }
-    public Optional<Quotation> findById(long id){
-        return quotations
-                .stream()
-                .filter(quotation -> quotation.getId() == id)
-                .findFirst();
-    }
-    public void save(Quotation quotation){
-        if (quotation.getId() == null){
-            quotation.setId(++lastQuotationId);
-            quotations.add(quotation);
-        }
-    }
+public interface QuotationRepository {
+    List<Quotation> findAll();
+    void delete(Quotation quotation);
+    Optional<Quotation> findById(long id);
+    void save(Quotation quotation);
 }
