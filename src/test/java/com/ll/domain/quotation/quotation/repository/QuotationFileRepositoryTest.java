@@ -13,7 +13,7 @@ public class QuotationFileRepositoryTest {
 
     @BeforeEach
     void beforeEach(){
-        Ut.file.delete("data/prod/quotation");
+        Ut.file.delete(QuotationFileRepository.QUOTATION_DATA_PATH);
     }
 
 
@@ -25,6 +25,15 @@ public class QuotationFileRepositoryTest {
         repository.save(quotation); // quotation의 id가 1로 할당된다.
 
         assertThat(quotation.getId()).isEqualTo(1L);
+    }
+    @Test
+    @DisplayName("1번 명언을 저장하면 테이블 폴더에 1.json이 생긴다.")
+    void t2(){
+        final QuotationFileRepository repository = new QuotationFileRepository();
+        final Quotation quotation = new Quotation("작가1", "내용1");
+        repository.save(quotation); // quotation의 id가 1로 할당된다.
+
+        assertThat(Ut.file.exists(repository._getQuotationFilePath(quotation))).isTrue();
     }
 
 }
