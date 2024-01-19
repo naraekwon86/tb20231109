@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.Comparator;
 
 public class Ut {
     public static class file {
@@ -20,7 +21,7 @@ public class Ut {
         }
 
         @SneakyThrows
-        public static void save(String filePath, String content) {
+        public static void save(final String filePath, final String content) {
             final Path path = Paths.get(filePath);
             try {
                 Files.writeString(path, content, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
@@ -38,18 +39,33 @@ public class Ut {
             }
         }
 
-        public static boolean exists(String filePath) {
+        public static boolean exists(final String filePath) {
             return Files.exists(Paths.get(filePath));
         }
 
         @SneakyThrows
-        public static boolean delete(String filePath) {
+        public static boolean delete(final String filePath) {
+            final Path path = Paths.get(filePath);
             try {
-                Files.delete(Paths.get(filePath));
+                Files.delete(path);
                 return true;
-            } catch (NoSuchFileException e) {
+            }catch (DirectoryNotEmptyException e){
+                Files.walk(path)
+                        .sorted(Comparator.reverseOrder())
+                        .forEach(_path ->{
+                            try {
+                                Files.delete(_path);
+                            }catch (IOException ex){
+                                throw new RuntimeException(ex);
+                            }
+                        });
+                    return true;
+
+            }catch (NoSuchFileException e){
                 return false;
             }
+
+
         }
 
         @SneakyThrows
@@ -73,7 +89,7 @@ public class Ut {
             }
         }
 
-        public static void save(String filePath, long content) {
+        public static void save(final String filePath, long content) {
             save(filePath, String.valueOf(content));
         }
 
