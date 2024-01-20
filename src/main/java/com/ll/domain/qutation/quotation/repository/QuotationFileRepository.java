@@ -20,7 +20,8 @@ public class QuotationFileRepository implements QuotationRepository{
     }
     @Override
     public Optional<Quotation> findById(final long id){
-        return Optional.empty();
+        final String filePath = _getQuotationFilePath(id);
+        return Optional.ofNullable(Ut.file.getContent(filePath, Quotation.class));
     }
     @Override
     public void save(final Quotation quotation){
@@ -39,9 +40,11 @@ public class QuotationFileRepository implements QuotationRepository{
         return Ut.file.getContentAsLong(LAST_ID_FILE_PATH, 0);
     }
     public String _getQuotationFilePath(final Quotation quotation){
-        return QUOTATION_DATA_PATH + quotation.getId() + ".json";
+        return _getQuotationFilePath(quotation.getId());
     }
-
+    public String _getQuotationFilePath(final long id){
+        return QUOTATION_DATA_PATH + id + ".json";
+    }
 
 }
 
