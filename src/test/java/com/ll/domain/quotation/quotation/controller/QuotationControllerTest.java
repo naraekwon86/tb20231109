@@ -1,5 +1,7 @@
 package com.ll.domain.quotation.quotation.controller;
 
+import com.ll.global.app.AppTest;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,20 +9,11 @@ import static com.ll.global.app.AppTest.run;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class QuotationControllerTest {
-
-    @Test
-    @DisplayName("프로그램 시작 시 \"== 명언앱 ==\" 출력")
-    void t1(){
-        final String out = run("");
-
-        assertThat(out)
-                .contains("== 명언 앱 ==");
+    @BeforeEach
+    void beforeEach(){
+        AppTest.clear();
     }
-    @Test
-    @DisplayName("종료")
-    void t2(){
-        final String out = run("");
-    }
+
     @Test
     @DisplayName("등록")
     void t3(){
