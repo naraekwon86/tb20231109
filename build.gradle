@@ -18,6 +18,9 @@ dependencies {
     testImplementation 'org.projectlombok:lombok:1.18.30'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 
+    //MYSQL 드라이버
+    implementation 'com.mysql:mysql-connector-j:8.2.0'
+
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.3'
 
