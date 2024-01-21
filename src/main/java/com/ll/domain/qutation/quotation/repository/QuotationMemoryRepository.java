@@ -19,8 +19,9 @@ public class QuotationMemoryRepository implements QuotationRepository{
         return quotations;
     }
     @Override
-    public void delete(final Quotation quotation){
-        quotations.remove(quotation);
+    public boolean delete(final Quotation quotation){
+
+        return quotations.remove(quotation);
     }
     @Override
     public Optional<Quotation> findById(final long id){

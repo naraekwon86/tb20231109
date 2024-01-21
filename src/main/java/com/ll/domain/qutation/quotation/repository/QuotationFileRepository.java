@@ -23,8 +23,8 @@ public class QuotationFileRepository implements QuotationRepository{
                 .toList();
     }
     @Override
-    public void delete(final Quotation quotation){
-
+    public boolean delete(final Quotation quotation){
+        return Ut.file.delete(_getQuotationFilePath(quotation));
     }
     @Override
     public Optional<Quotation> findById(final long id){

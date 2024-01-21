@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface QuotationRepository {
     List<Quotation> findAll();
-    void delete(Quotation quotation);
+    boolean delete(Quotation quotation);
     Optional<Quotation> findById(long id);
     void save(Quotation quotation);
 }
